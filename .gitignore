@@ -42,3 +42,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Angular CLI cache and browser test results
+/.angular
+/playwright-report
+/test-results

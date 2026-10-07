@@ -1,14 +1,11 @@
-import { AppPage } from './app.po';
+import { expect, test } from '@playwright/test';
 
-describe('practice App', () => {
-  let page: AppPage;
+test('displays the welcome message without browser errors', async ({ page }) => {
+  const pageErrors: string[] = [];
+  page.on('pageerror', (error) => pageErrors.push(error.message));
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
+  await page.goto('/');
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
-  });
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Welcome to app!');
+  expect(pageErrors).toEqual([]);
 });
